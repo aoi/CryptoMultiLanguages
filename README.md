@@ -30,3 +30,15 @@ https://nodejs.org/docs/latest-v8.x/api/crypto.html
 
 ## Sign - Verify
 SHA256withRSA
+
+## Usage
+### Node.js
+
+```
+cd Node.js
+npm install
+npm test
+```
+
+### Android
+Open project in Android Studio, then run CryptoTest.java  
