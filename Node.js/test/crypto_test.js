@@ -22,10 +22,37 @@ describe('Crypto Test', function(){
     done();
   });
 
+  it('Encrypt AES128 CBC PKCS5Padding', function(done){
+    const iv = new Buffer(crypto.randomBytes(16))
+    const cipher = crypto.createCipheriv('aes-128-cbc', paddingPassword(PASSWORD), iv);
+
+    let e = cipher.update(DATA, 'utf8', 'base64');
+    e += cipher.final('base64');
+
+    const ivB64 = iv.toString('base64');
+    console.log('iv base64: ' + ivB64);
+    console.log('encoded data: ' + e);
+
+    done();
+  });
+
   it('Decrypt AES128 ECB PKCS5Padding', function(done){
     const encData = 'RFGeILFKldYRG/8J88ClKhNrqXPH8GLPqMnqFuFzDc0=';
 
     const decipher = crypto.createDecipheriv('aes-128-ecb', paddingPassword(PASSWORD), '');
+    let d = decipher.update(encData, 'base64', 'utf8');
+    d += decipher.final('utf8');
+
+    assert.equal(d, DATA);
+
+    done();
+  });
+
+  it('Decrypt AES128 CBC PKCS5Padding', function(done){
+    const ivB64 = '4BzBMSEdWayB5lzZjE64Xg==';
+    const encData = 'OvSkSxupiqM0N4keI9nZ2hGpgep4/b+i2QgtTNd42uM=';
+
+    const decipher = crypto.createDecipheriv('aes-128-cbc', paddingPassword(PASSWORD), new Buffer(ivB64, 'base64'));
     let d = decipher.update(encData, 'base64', 'utf8');
     d += decipher.final('utf8');
 

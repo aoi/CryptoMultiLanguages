@@ -41,14 +41,14 @@ public class CryptoTest {
     }
 
     @Test
-    public void testEncrypto_AES128_ECB_PKCS5Padding() throws Exception {
+    public void testEncrypt_AES128_ECB_PKCS5Padding() throws Exception {
         String encData = crypto.encrypt_AES128_ECB_PKCS5Padding(DATA, PASSWORD);
 
         assertEquals("RFGeILFKldYRG/8J88ClKhNrqXPH8GLPqMnqFuFzDc0=", encData);
     }
 
     @Test
-    public void testDecrypto_AES128_ECB_PKCS5Padding() {
+    public void testDecrypt_AES128_ECB_PKCS5Padding() {
         String decData = crypto.decrypt_AES128_ECB_PKCS5Padding("RFGeILFKldYRG/8J88ClKhNrqXPH8GLPqMnqFuFzDc0=", PASSWORD);
 
         assertEquals(DATA, decData);
